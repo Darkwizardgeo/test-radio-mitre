@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block stylesheets %}
+    
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <div class="card-deck">
+            <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{asset('/images/Publicidad.png')}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                    </div>
+                </div>
+            
+                  {% for new in news %}
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{new.image}}" alt="Card image cap" data-url="{{new.url}}">
+                        <div class="card-body" data-url="{{new.url}}">
+                        <h5 class="card-title">{{new.title}}</h5>
+                        <p class="card-text">{{new.title}}</p>
+                        <a href="{{new.url}}" class="redirect-link btn btn-primary">{{new.category}}</a>
+                        </div>
+                    </div>
+                  {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $( document ).ready(function() {
+            $('.card-img-top').on('click', function(elem){
+                window.location.href =($(this).attr('data-url'))
+            });
+            $('.card-body').on('click', function(elem){
+                window.location.href =($(this).attr('data-url'))
+            });
+        });
+    </script>
+{% endblock %}
